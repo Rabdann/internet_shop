@@ -7,11 +7,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./database:/var/lib/postgresql
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
+      - ./database:/var/lib/postgresql/data
+    env_file: .env
   
   backend:
     container_name: shop_backend
@@ -22,6 +19,6 @@ services:
     depends_on:
       - db
     volumes:
-      - ./:/code/
+      - ./app/:/code/
       - /code/database/
     build: .
